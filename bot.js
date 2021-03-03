@@ -3,6 +3,7 @@ const { Server } = require("ws");
 const client = new Discord.Client();
 var modmailUser = '521115847801044993';
 var mod = 'Infinity_Oofs#3438'
+const version = 1.3
 
 client.on('ready', () => {
      console.log("Ready");
@@ -34,13 +35,21 @@ client.on('message', msg => {
     const suggestion = new Discord.MessageEmbed()
       .setColor('#0099ff')
       .setTitle('Suggestion from ' + msg.author.tag)
-      .setFooter('Suggestion by ' + msg.author.tag + ' | Version 1.2')
+      .setFooter('Suggestion by ' + msg.author.tag + ' | Version ' + version)
       .setDescription(msg.content.replace('-suggest ', ''));
 
       client.channels.cache.get('807046119950778419').send(suggestion).then(function (message) {
         message.react("✅")
         message.react("❌")
       })
+  }
+  if(msg.content === '-help'){
+    const help = new Discord.MessageEmbed()
+      .setColor('0099ff')
+      .setTitle('Commands')
+      .setFooter('Help Menu | Version ' + version)
+      .setDescription('**-help** - Brings up this menu \n**-suggest** (suggestion) - Puts a suggestion in the suggestion channel \n**Getting Support** - Just DM this bot to send a message to staff ');
+    msg.channel.send(help)
   }
 });
 
