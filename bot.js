@@ -3,12 +3,12 @@ const { Server } = require("ws");
 const client = new Discord.Client();
 var modmailUser = '521115847801044993';
 var mod = 'Infinity_Oofs#3438'
-const version = 1.4
+const version = 1.5
 const hasTicket = new Set()
 
 client.on('ready', () => {
   console.log("Ready");
-  client.user.setActivity("CraftACat || Just DM", { type: "PLAYING"});
+  client.user.setActivity("CraftACat || -help", { type: "PLAYING"});
 });
 client.on('message', msg => {
   if(msg.content.startsWith('-end')){
@@ -72,6 +72,34 @@ client.on('message', msg => {
         message.react("❌")
       })
   }
+    
+  if(msg.content === '-help mc'){
+    if(msg.member.roles.cache.find(r => r.name === "Staff")){
+      const helpMC = new Discord.MessageEmbed()
+        .setColor('#0099ff')
+        .setTitle('In-game Staff Commands')
+        .setFooter('In-game Commands | Version ' + version)
+        .setDescription('**-help mc** - Brings up this menu \n**Minecraft Commands** \n**/tempban (user) (time) (reason)** - Tempban a user \n**/co inspect** - Switches to inspector mode \n**/co rollback user: (user) time: (time) radius: (radius)** - Rollback something \n**/staff** - Switches to staff mode');
+      msg.channel.send(helpMC)
+    }
+    else{
+      return msg.reply("Sorry, but you don't have permission to do this command.")
+    }
+  }
+  if(msg.content === '-help support'){
+    if(msg.member.roles.cache.find(r => r.name === "Staff")){
+      const helpSupport = new Discord.MessageEmbed()
+        .setColor('#0099ff')
+        .setTitle('Support Staff Commands')
+        .setFooter('Discord Commands | Version ' + version)
+        .setDescription("**-help support** - Brings up this menu \n**-user (user ID)** - Picks a user to message \n**-answer (message)** - Sends a message to the user you specified \n**-end (user ID)** - Ends a user's ticket");
+      msg.channel.send(helpSupport)
+    }
+    else{
+      return msg.reply("Sorry, but you don't have permission to do this command.")
+    }
+  }
+  
   if(msg.content === '-help'){
     const help = new Discord.MessageEmbed()
       .setColor('#0099ff')
