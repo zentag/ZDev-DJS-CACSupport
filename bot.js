@@ -3,8 +3,9 @@ const { Server } = require("ws");
 const client = new Discord.Client();
 var modmailUser = '521115847801044993';
 var mod = 'Infinity_Oofs#3438'
-const version = 1.5
+const version = 1.6
 const hasTicket = new Set()
+var mode = "normal"
 
 client.on('ready', () => {
   console.log("Ready");
@@ -12,18 +13,28 @@ client.on('ready', () => {
 });
 client.on('message', msg => {
   if(msg.content.startsWith('-end')){
-    if(msg.member.roles.cache.find(r => r.name === "Support Team")){
-      hasTicket.delete(msg.content.replace('-end ', ''))
-      const ticketEnd = new Discord.MessageEmbed()
-        .setTitle('Ticket closed by staff ' + msg.author.tag)
-        .setDescription('Your ticket has been marked as resolved. To add another ticket do -ticket.')
-        .setColor('#0099ff')
-        .setFooter('Ticket | Version ' + version);
-      client.users.cache.get(msg.content.replace('-end ', '')).send(ticketEnd)
-      msg.reply('You have ended user: ' + msg.content.replace('-end ', '') + "'s ticket.")
+    if(isNaN(msg.content.replace('-end ', ''))){
+      msg.reply("Sorry, you have to use a valid user ID")
     }
     else{
-      msg.reply('Sorry, you do not have permssion to do this command.')
+      if(msg.member.roles.cache.find(r => r.name === "Support Team")){
+        try{
+          hasTicket.delete(msg.content.replace('-end ', ''))
+          const ticketEnd = new Discord.MessageEmbed()
+            .setTitle('Ticket closed by staff ' + msg.author.tag)
+            .setDescription('Your ticket has been marked as resolved. To add another ticket do -ticket.')
+            .setColor('#0099ff')
+            .setFooter('Ticket | Version ' + version);
+          client.users.cache.get(msg.content.replace('-end ', '')).send(ticketEnd)
+          msg.reply("You have ended " + msg.content.replace('-end ', '') + "'s ticket")
+        }
+        catch(err){
+          
+        }
+      }
+      else{
+        msg.reply('Sorry, you do not have permssion to do this command.')
+      }
     }
   }
   if (msg.content.startsWith('-ticket')) {
@@ -34,7 +45,12 @@ client.on('message', msg => {
         .setFooter('Ticket | Version ' + version)
         .setDescription('Please state your problem now. Staff have been pinged and will respond shortly. From now on you can DM the bot directly.');
       client.users.cache.get(msg.author.id).send(ticketStart)
-      client.channels.cache.get('816423421323640853').send('@here ' + msg.author.tag + ' has started a ticket (' + msg.author.id + ')');
+      if(mode === "normal"){
+        client.channels.cache.get('816423421323640853').send('@here ' + msg.author.tag + ' has started a ticket (' + msg.author.id + ')');
+      }
+      if(mode === "test"){
+        client.channels.cache.get('816423421323640853').send('Testing mode: ' + msg.author.tag + ' has started a ticket (' + msg.author.id + ')');
+      }
       hasTicket.add(msg.author.id)
       msg.delete()
     }
@@ -49,12 +65,23 @@ client.on('message', msg => {
     }
   }
   if (msg.content.startsWith('-user')) {
-    modmailUser = msg.content.replace('-user ', '');
+    if(isNaN(msg.content.replace('-user ', ''))){
+      msg.reply("Sorry, you have to use valid a user ID")
+    }
+    else{
+      modmailUser = msg.content.replace('-user ', '');
+    }
   }
   if (msg.content.startsWith('-answer')) {
     if(msg.member.roles.cache.find(r => r.name === "Founder") || msg.member.roles.cache.find(r => r.name === "Admin") || msg.member.roles.cache.find(r => r.name === "Moderator") || msg.member.roles.cache.find(r => r.name === "Trial Moderator")){
       mod = msg.author.tag
-      client.users.cache.get(modmailUser).send('**Staff:** ' + mod + ': ' + msg.content.replace('-answer ', ''));
+      try{
+        client.users.cache.get(modmailUser).send('**Staff:** ' + mod + ': ' + msg.content.replace('-answer ', ''));
+        msg.channel.send("The message went through to " + modmailUser)
+      }
+      catch(error){
+
+      }
     }
     else{
       msg.reply('sorry, you do not have permission to do this command.')
