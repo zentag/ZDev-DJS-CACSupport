@@ -1,0 +1,14 @@
+{
+    "name": "CraftABot",
+    "version": "1.7",
+    "description": "A Bot for CraftACat!",
+    "main": "bot.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node .",
+      "lint": "eslint ."
+    },
+    "keywords": [],
+    "author": "Infinity_Oofs",
+    "license": "ISC"
+  }
