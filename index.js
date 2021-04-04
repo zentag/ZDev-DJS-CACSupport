@@ -4,7 +4,7 @@ const WOKCommands = require('wokcommands');
 const config = require("./config.json")
 global.hasTicket = new Set()
 
-global.botVersion = "2.0"
+global.botVersion = "2.1"
 
 client.on('ready', async () => {
     console.log('ready')

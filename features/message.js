@@ -6,7 +6,13 @@ module.exports = (client) => {
                     client.channels.cache.get("816423421323640853").send(message.author.tag + " (" + message.author.id + ") >>" + message.content)
                 }
                 else{
-                    message.reply("Sorry, you don't have a ticket open. Open one with -ticket")
+                    if(message.content.startsWith("-")){
+
+                    }
+                    else{
+                        message.reply("Sorry, you don't have a ticket open. Open one with -ticket")
+                    }
+
                 }
             }
             
