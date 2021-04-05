@@ -9,7 +9,7 @@ module.exports = {
                 .setColor('#0099ff')
                 .setTitle('Commands')
                 .setFooter('Help Menu | Version ' + botVersion)
-                .setDescription('**-help** - Brings up this menu \n**-suggest** (suggestion) - Puts a suggestion in the suggestion channel \n**-ticket** - Opens a new ticket which pings staff\n**Getting Support** - Just DM this bot to send a message to staff ');
+                .setDescription("**-help** - Brings up this menu \n**-suggest** (suggestion) - Puts a suggestion in the suggestion channel \n**-ticket** - Opens a new ticket which pings staff\n**-botsuggest (suggestion) - Send a suggestion for CraftABot to the Developer \n**-friends (someone's @ note: putting an @ is optional)** - Get a friend count of yourself when just using -friends or get someone else's with -friend (@)\n**Getting Support** - Just DM this bot to send a message to staff ");
             message.channel.send(help)
         }
         if(message.content === "-help mc"){
