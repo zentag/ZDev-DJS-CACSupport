@@ -4,7 +4,9 @@ const WOKCommands = require('wokcommands');
 const config = require("./config.json")
 global.hasTicket = new Set()
 
-global.botVersion = "2.2.1"
+global.botVersion = "2.3"
+
+global.mode = "normal"
 
 client.on('ready', async () => {
     console.log('ready')
@@ -16,5 +18,9 @@ client.on('ready', async () => {
     }).setDefaultPrefix('-')
 })
 
-
-client.login(process.env.token);
+if(mode == "testing"){
+    client.login(config.testToken);
+}
+if(mode == "normal"){
+    client.login(process.env.token);
+}
