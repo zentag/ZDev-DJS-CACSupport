@@ -6,7 +6,7 @@ module.exports = (client) => {
                     client.channels.cache.get("816423421323640853").send(message.author.tag + " (" + message.author.id + ") >>" + message.content)
                 }
                 else{
-                    if(message.content.startsWith("-")){
+                    if(message.content.startsWith("-") || hasApp.has(message.author.id)){
 
                     }
                     else{
