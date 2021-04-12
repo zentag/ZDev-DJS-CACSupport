@@ -1,10 +1,10 @@
 const Discord = require("discord.js")
-
+var open = false
 module.exports = {
     minArgs: 0,
     maxArgs: 0,
     callback: ({ message, client }) => {
-        if(message.channel.type == "dm"){
+        if(message.channel.type == "dm" && open == true){
             global.hasApp = new Set()
             hasApp.add(message.author.id)
             const questions = ["What is your Minecraft name?", "What are you applying for?", "What is your MEE6 level?(!rank)", "How many hours have you played?(Esc>Statistics>Time Played)", "When did you join the server?", "Why should we pick you?(3+ sentences)", "What type of person are you?(3+ qualities)", "If a player has tons of diamond gear after 20 minutes playing, what do you do?", "You get around 5 reports about a player being toxic/annoying/mean. What do you do?", "A player joins a immediately says “this is a shitty server”. What do you do?"]
@@ -31,7 +31,7 @@ module.exports = {
             })
         }
         else{
-            message.reply("Please use this command in a DM channel with me!")
+            message.reply("Please use this command in a DM channel with me! If you are, then applications may be closed.")
         }
         
     }
