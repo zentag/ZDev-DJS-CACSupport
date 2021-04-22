@@ -7,7 +7,7 @@ module.exports = {
         if(message.channel.type == "dm" && open == true){
             global.hasApp = new Set()
             hasApp.add(message.author.id)
-            const questions = ["What is your Minecraft name?", "What are you applying for?", "What is your MEE6 level?(!rank)", "How many hours have you played?(Esc>Statistics>Time Played)", "When did you join the server?", "Why should we pick you?(3+ sentences)", "What type of person are you?(3+ qualities)", "If a player has tons of diamond gear after 20 minutes playing, what do you do?", "You get around 5 reports about a player being toxic/annoying/mean. What do you do?", "A player joins a immediately says “this is a shitty server”. What do you do?"]
+            const questions = ["What is your Minecraft name?", "What are you applying for?", "What is your MEE6 level?(!rank)", "How many hours have you played?(Esc>Statistics>Time Played)", "When did you join the server?", "Why should we pick you?(3+ sentences)", "What type of person are you?(3+ qualities)", "If a player has tons of diamond gear after 20 minutes playing, what do you do?(mods only)", "You get around 5 reports about a player being toxic/annoying/mean. What do you do?(mods only)", "A player joins a immediately says “this is a shitty server”. What do you do?(mods only)"]
             let counter = 1
             const filter = m => m.author.id === message.author.id
             const collector = new Discord.MessageCollector(message.channel, filter, {
