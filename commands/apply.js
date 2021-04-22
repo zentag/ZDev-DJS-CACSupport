@@ -1,5 +1,5 @@
 const Discord = require("discord.js")
-var open = false
+var open = true
 module.exports = {
     minArgs: 0,
     maxArgs: 0,
