@@ -3,7 +3,7 @@ const client = new Discord.Client();
 const WOKCommands = require('wokcommands');
 const config = require("./config.json")
 global.hasTicket = new Set()
-
+global.hasApp = new Set()
 global.botVersion = "2.4.3"
 
 global.mode = "normal"

@@ -7,7 +7,7 @@ module.exports = (client) => {
                 }
                 else{
                     if(message.content.startsWith("-") || hasApp.has(message.author.id)){
-
+                        
                     }
                     else{
                         message.reply("Sorry, you don't have a ticket open. Open one with -ticket")
